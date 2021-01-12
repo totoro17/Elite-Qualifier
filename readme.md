@@ -1,6 +1,6 @@
 # Title
 
-Simple (or clever and funny?) description
+A program giving a simple, quick, and engaging experience with a ChatBot aptly named, "Chatty McChatface".
 
 ## Table of Contents
 
@@ -12,14 +12,14 @@ Simple (or clever and funny?) description
 
 ## Background
 
-This is why this application exists.
+This application exists as a project for the Code2College's Elite program.
 
 ## Install
 
-These are the steps to setup your local environment to run this application.
+Expects to use repl.it install system.
 
 ## Usage
 
-These are the steps to use the application or interact with it.
+Application runs on Python 3.8.2.
 
 ### Any optional sections
