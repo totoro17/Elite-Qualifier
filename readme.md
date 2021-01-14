@@ -1,4 +1,4 @@
-# Title
+# "Chatty McChatface" Elite qualifier project
 
 A program giving a simple, quick, and engaging experience with a ChatBot aptly named, "Chatty McChatface".
 
