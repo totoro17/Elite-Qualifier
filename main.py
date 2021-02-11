@@ -128,12 +128,13 @@ class chat:
 
 
   
+if __name__ == '__main__':
+  #initializes a new chatbot with chosen name
+  chatbot = chat("Chatty McChatface")
+  #begins the conversation
+  chatbot.introduction()
 
 
-#initializes a new chatbot with chosen name
-chatbot = chat("Chatty McChatface")
-#begins the conversation
-chatbot.introduction()
 
 
 
