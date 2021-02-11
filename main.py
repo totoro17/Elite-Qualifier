@@ -4,6 +4,7 @@ from termcolor import colored, cprint
 import random
 import time
 
+
 class chat:
   def __init__(self, bot_name):
 
