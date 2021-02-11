@@ -29,6 +29,9 @@ jobs:
         uses: actions/setup-python@v1
         with:
           python-version: 3.6
+        
+      - name: Install dependencies 
+        run: pip install termcolor
 
       - name: Run tests
         run: python test.py
