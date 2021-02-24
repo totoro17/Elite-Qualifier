@@ -3,21 +3,34 @@
 from termcolor import colored, cprint
 import random
 import time
+import emojis
 
 class chat:
   def __init__(self, bot_name):
 
     self.bot_name = bot_name   # game persona name
     self.name = None           # user's name
-    self.mode = None           # sets a mode / add feature later
+    self.emoji_mode= None           # sets a mode 
     self.color = "grey"        # the initial text color
-    self.userinformation = {"home" : "Where are you from?", "fav_color" : "What is your favorite color? \n*If your favorite color happens to be 'blue', 'green', 'cyan', 'yellow', 'red', or 'magenta' then you are in for a treat!*"} #questions to ask user
+
+    self.yeehaw_emoji = [emojis.encode(':cow:' ),emojis.encode(':chicken:'), emojis.encode(':corn:'), emojis.encode(':rooster:'), emojis.encode(':goat:'), emojis.encode(':pig:'), emojis.encode(':pig2:'),emojis.encode(':cactus:'), emojis.encode(':tractor:'), emojis.encode(':us:')]
+
+    self.hippie_emoji = [emojis.encode(':herb:'),emojis.encode(':sunflower:'),emojis.encode(':mushroom:'),emojis.encode(':seedling:'),emojis.encode(':sun_with_face:'), emojis.encode(':snail:'),emojis.encode(':v:'), emojis.encode(':crystal_ball:'), emojis.encode(':earth_americas:')]
+
+    self.surferbro_emoji = [emojis.encode(':tropical_fish:'),emojis.encode(':sunglasses:'),emojis.encode(':v:'),emojis.encode(':ocean:'),emojis.encode(':fish:'), emojis.encode(':shell:'), emojis.encode(':sailboat:'), emojis.encode(':anchor:'), emojis.encode(':surfer:')]
+
+    #questions to ask user
+    self.userinformation = {"home" : "Where are you from?", 'mode' : "Would you like surfer dude mode, hippie mode, or yeehaw mode? Please reply with 'bro', 'hippie', or 'yeehaw'.", "fav_color" : "What is your favorite color? \n*If your favorite color happens to be 'blue', 'green', 'cyan', 'yellow', 'red', or 'magenta' then you are in for a treat!*"} 
+
     self.color_options = ["blue", "green", "cyan", "yellow", "red", "grey", "magenta"]  #possible color options to alter text given the users favorite color choice
+
+    
     
     
   #the introduction function that is called first to begin the chatbot conversation
   #no inputs or outputs
   def introduction(self):
+    
     self.name = self.getinput("Hello, My name is " + self.bot_name + "! What is your name?", 0)
 
     time.sleep(1)
@@ -36,32 +49,43 @@ class chat:
     else:
       self.color = "grey"
 
-    bobquestion = self.getinput("What a coincidence, I'm from " + self.userinformation["home"] + " too! Do you happen to know Bob? (Reply 'yes' or 'no')", 1)
+    if self.userinformation["mode"].lower() == 'bro':
+      self.emoji_mode = self.surferbro_emoji
+    elif self.userinformation["mode"].lower() == 'hippie':
+      self.emoji_mode = self.hippie_emoji
+    elif self.userinformation["mode"].lower() == 'yeehaw':
+      self.emoji_mode = self.yeehaw_emoji
+    else:
+      cprint("\nI regret to inform you that your mode selection above was not valid. You have automatically been set to yeehaw mode", self.color, "on_white")
+      self.emoji_mode = self.yeehaw_emoji
+      
+
+    bobquestion = self.getinput(self.emoji_mode[0] + " What a coincidence, I'm from " + self.userinformation["home"] + " too! Do you happen to know Bob? (Reply 'yes' or 'no')", 1)
 
     if bobquestion == "yes" or bobquestion == "Yes":
-      cprint("\nSmall world huh? Bob is really a great fella.", self.color, "on_white")
+      cprint("\n" + self.emoji_mode[1] + " Small world huh? Bob is really a great fella." , self.color, "on_white")
 
     elif bobquestion == "no" or bobquestion == "No":
-      cprint("\nI never cared for Bob too much myself.", self.color, "on_white")
+      cprint("\n" + self.emoji_mode[1] + " I never cared for Bob too much myself.", self.color, "on_white")
 
     else:
-      cprint("\nSorry I can't quite comprehend your answer to my question. In the future, please reply in the way I ask. I'm still learning. Anyways, moving on!", self.color, "on_white")
+      cprint("\n" + self.emoji_mode[1] + " Sorry I can't quite comprehend your answer to my question. In the future, please reply in the way I ask. I'm still learning. Anyways, moving on! ", self.color, "on_white")
 
-    self.getinput("Beep...boop... My systems have finished calibrating and the chat is now catered to you. Anyways, what are your feelings on that big global important economic matter going on?", 1)
+    self.getinput(self.emoji_mode[2] + " Beep...boop... My systems have finished calibrating and the chat is now catered to you. Anyways, what are your feelings on that big global important economic matter going on? ", 1)
 
     time.sleep(1)
     print()
-    cprint("You make some really great points " + self.name + ".", self.color, "on_white")
-    gameanswer = self.getinput("Would you like to play a quick little game? Reply 'yes' or 'no'", 1)
+    cprint(self.emoji_mode[3] + " You make some really great points " + self.name + ".", self.color, "on_white")
+    gameanswer = self.getinput(self.emoji_mode[4] + " Would you like to play a quick little game?" + " Reply 'yes' or 'no'", 1)
 
     if gameanswer == "yes" or gameanswer == "Yes" or gameanswer == "YES":
       time.sleep(1)
       print()
-      cprint("Awesome! Lets do this thing.", self.color, "on_white")
+      cprint(self.emoji_mode[5] + " Awesome! Lets do this thing.", self.color, "on_white")
       self.quickgame()
     else:
       time.sleep(1)
-      cprint("\nWell we are going to play anyways.", self.color, "on_white")
+      cprint("\n" + self.emoji_mode[5] + "Well we are going to play anyways.", self.color, "on_white")
       self.quickgame()
 
 
@@ -114,17 +138,18 @@ class chat:
 #called after the quickgame has been completed to continue conversation
 #no inputs or outputs
   def continuegame(self):
-    weatherquestion = self.getinput("Impressive guessing skills " + self.name + ". Why don't you go ahead and ask me about the weather?", 1)
+    weatherquestion = self.getinput(self.emoji_mode[6] + " Impressive guessing skills " + self.name + ". Why don't you go ahead and ask me about the weather? ", 1)
 
     if "weather" in weatherquestion or "Weather" in weatherquestion:
       time.sleep(1)
-      cprint("\nHaha, I have fooled you again " + self.name + "! How can I know the weather? I am nothing but a series of numbers trapped inside this cold metal shell.", self.color, "on_white")
+      cprint("\n" + self.emoji_mode[7] + " Haha, I have fooled you again " + self.name + "! How can I know the weather? I am nothing but a series of numbers trapped inside this cold metal shell.", self.color, "on_white")
     else:
       time.sleep(1)
-      cprint("I like you, you little rebel. Going against the flow, good for you " + self.name + ".", self.color, "on_white")
+      cprint(self.emoji_mode[7] + " I like you, you little rebel. Going against the flow, good for you " + self.name + ".", self.color, "on_white")
 
     time.sleep(2)
-    cprint("\nI'm so sorry to cut our chat short but I'm running late for my software appointment. I've been feeling so strange lately since people just keep on pushing my buttons. Check ya later!", self.color, "on_white")
+    cprint("\n" + self.emoji_mode[8] + "I'm so sorry to cut our chat short but I'm running late for my software appointment. I've been feeling so strange lately since people just keep on pushing my buttons. Check ya later!", self.color, "on_white")
+    exit()
 
 
   

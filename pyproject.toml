@@ -7,6 +7,8 @@ authors = ["Your Name <you@example.com>"]
 [tool.poetry.dependencies]
 python = "^3.8"
 termcolor = "^1.1.0"
+emoji = "^1.2.0"
+emojis = "^0.6.0"
 
 [tool.poetry.dev-dependencies]
 
